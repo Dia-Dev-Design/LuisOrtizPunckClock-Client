@@ -20,8 +20,10 @@ const PunchClockTable = ({ refreshTable }) => {
       .catch((error) => console.log(error));
   };
 
-  const returnTimeWorked = (timeIn, timeOut) => {      
-    return DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), {string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"]})
+  const returnTimeWorked = (timeIn, timeOut) => {
+    let hoursWorked = DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), {string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"]})
+    console.log("These are hours worked", hoursWorked)      
+    return hoursWorked
     
     // DateTime.fromISO(timeIn).toRelative({
     //   base: DateTime.fromISO(timeOut),
@@ -36,16 +38,19 @@ const PunchClockTable = ({ refreshTable }) => {
 
   // Filtering logic remains the same
   useEffect(() => {
-    const filtered = punchData.filter(record => {
-      const fullNameMatch = record.user.username.toLowerCase().includes(searchName.toLowerCase());
-      const punchInDate = DateTime.fromISO(record.punchIn);
-      const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
-      const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+    if (punchData.length) {
 
-      return fullNameMatch && yearMatch && monthMatch;
-    });
-
-    setFilteredData(filtered);
+      const filtered = punchData.filter(record => {
+        const fullNameMatch = record.user.username.toLowerCase().includes(searchName.toLowerCase());
+        const punchInDate = DateTime.fromISO(record.punchIn);
+        const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
+        const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+  
+        return fullNameMatch && yearMatch && monthMatch;
+      });
+  
+      setFilteredData(filtered);
+    }
   }, [searchName, searchYear, searchMonth, punchData]);
 
   return (
