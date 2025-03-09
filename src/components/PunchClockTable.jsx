@@ -21,7 +21,7 @@ const PunchClockTable = ({ refreshTable }) => {
   };
 
   const returnTimeWorked = (timeIn, timeOut) => {      
-    return DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), ["years", "months", "weeks", "days", "hours", "minutes", "seconds"])
+    return DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), {string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"]})
     
     // DateTime.fromISO(timeIn).toRelative({
     //   base: DateTime.fromISO(timeOut),
