@@ -20,14 +20,13 @@ const PunchClockTable = ({ refreshTable }) => {
       .catch((error) => console.log(error));
   };
 
-  const returnTimeWorked = (timeIn, timeOut) => {  
-    let timeDiff = timeOut - timeIn
-    return timeDiff.toLocaleString(["years", "months", "weeks", "days", "hours", "minutes", "seconds"])
+  const returnTimeWorked = (timeIn, timeOut) => {      
+    return DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), ["years", "months", "weeks", "days", "hours", "minutes", "seconds"])
     
-    // return "" + `${DateTime.fromISO(timeIn).toRelative({
+    // DateTime.fromISO(timeIn).toRelative({
     //   base: DateTime.fromISO(timeOut),
     //   string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"],
-    // })}`
+    // })
   };
 
   // Fetch data on initial load and whenever refreshTable changes
