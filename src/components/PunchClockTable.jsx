@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import { SERVER_URL } from '../services/SERVER_URL';
@@ -9,6 +10,8 @@ const PunchClockTable = ({ refreshTable }) => {
   const [searchName, setSearchName] = useState('');
   const [searchYear, setSearchYear] = useState('');
   const [searchMonth, setSearchMonth] = useState('');
+
+  const { user } = useContext(AuthContext)
 
   const fetchPunchData = () => {
     axios
