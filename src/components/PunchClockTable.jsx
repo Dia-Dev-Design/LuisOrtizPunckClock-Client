@@ -40,22 +40,22 @@ const PunchClockTable = ({ refreshTable }) => {
   }, [refreshTable]);
 
   // Filtering logic remains the same
-  useEffect(() => {
-    if (user && punchData.length) {
+  // useEffect(() => {
+  //   if (user && punchData.length) {
 
-      const filtered = punchData.filter(record => {
-        console.log("this is the record upon execution of effect", record, searchName)
-        const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
-        const punchInDate = DateTime.fromISO(record.punchIn);
-        const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
-        const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+  //     const filtered = punchData.filter(record => {
+  //       console.log("this is the record upon execution of effect", record, searchName)
+  //       const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
+  //       const punchInDate = DateTime.fromISO(record.punchIn);
+  //       const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
+  //       const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
   
-        return fullNameMatch && yearMatch && monthMatch;
-      });
+  //       return fullNameMatch && yearMatch && monthMatch;
+  //     });
   
-      setFilteredData(filtered);
-    }
-  }, [searchName, searchYear, searchMonth, punchData]);
+  //     setFilteredData(filtered);
+  //   }
+  // }, [searchName, searchYear, searchMonth, punchData]);
 
   return (
     <div>
