@@ -21,13 +21,11 @@ const PunchClockTable = ({ refreshTable }) => {
   };
 
   const returnTimeWorked = (timeIn, timeOut) => {
-    let timeRelative = DateTime.fromISO(timeIn).toRelative({
+    
+    return DateTime.fromISO(timeIn).toRelative({
       base: DateTime.fromISO(timeOut),
       string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"],
-    })
-    let timeWorked = timeRelative ? timeRelative : ''
-    console.log("This is typeof timeWorked", timeWorked)
-    return timeRelative.toString().split(' ').pop().join(' ')
+    }).split(' ').pop().join(' ')
   };
 
   // Fetch data on initial load and whenever refreshTable changes
@@ -97,7 +95,7 @@ const PunchClockTable = ({ refreshTable }) => {
               <td>{record.user.username}</td>
               <td>{record.punchIn ? DateTime.fromISO(record.punchIn).toLocaleString(DateTime.DATETIME_SHORT) : 'N/A'}</td>
               <td>{record.punchOut ? DateTime.fromISO(record.punchOut).toLocaleString(DateTime.DATETIME_SHORT) : 'N/A'}</td>
-              <td>{record.punchOut ? returnTimeWorked(record.punchIn, record.punchOut) : 'N/A'}</td>
+              <td>{record.punchOut ? returnTimeWorked(record.punchIn, record.punchOut).split(' ').pop().join(' ') : 'N/A'}</td>
             </tr>
           ))}
         </tbody>
