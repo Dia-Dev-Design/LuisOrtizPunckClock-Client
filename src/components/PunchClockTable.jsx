@@ -38,7 +38,7 @@ const PunchClockTable = ({ refreshTable }) => {
 
   // Filtering logic remains the same
   useEffect(() => {
-    if (punchData.length) {
+    if (user && punchData.length) {
 
       const filtered = punchData.filter(record => {
         const fullNameMatch = record.user.username.toLowerCase().includes(searchName.toLowerCase());
