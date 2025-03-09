@@ -1,17 +1,17 @@
-import { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../context/auth.context';
+import { useState, useEffect } from 'react';
+// import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import { SERVER_URL } from '../services/SERVER_URL';
 
-const PunchClockTable = ({ isPunchInEnabled, isPunchOutEnabled }) => {
+const PunchClockTable = ({ refreshTable }) => {
   const [punchData, setPunchData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchName, setSearchName] = useState('');
   const [searchYear, setSearchYear] = useState('');
   const [searchMonth, setSearchMonth] = useState('');
 
-  const { user } = useContext(AuthContext)
+  // const { user } = useContext(AuthContext)
 
   const fetchPunchData = () => {
     axios
@@ -23,23 +23,28 @@ const PunchClockTable = ({ isPunchInEnabled, isPunchOutEnabled }) => {
       .catch((error) => console.log(error));
   };
 
-
   const returnTimeWorked = (timeIn, timeOut) => {
     let hoursWorked = DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), ["days", "hours", "minutes", "seconds"])
     console.log("These are hours worked right here", hoursWorked)      
     return (hoursWorked.values.days ? `${hoursWorked.values.days} days` : "") + (hoursWorked.values.hours ? `${hoursWorked.values.hours} hours` : "") + (hoursWorked.values.minutes ? `${hoursWorked.values.minutes} minutes` : "") + (hoursWorked.values.seconds ? `${hoursWorked.values.seconds} seconds` : "") 
   };
 
-  // const returnTimeWorked = (timeIn, timeOut) => {
-  //   let hoursWorked = DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), {string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"]})
-  //   console.log("These are hours worked right here", hoursWorked)      
-  //   return hoursWorked
-  // };
-
-  // Fetch data on initial load and whenever refreshTable changes
   useEffect(() => {
     fetchPunchData();
-  }, [isPunchInEnabled, isPunchOutEnabled]);
+  }, [refreshTable]);
+
+  useEffect(() => {
+    const filtered = punchData.filter(record => {
+      const fullNameMatch = record.user.username.toLowerCase().includes(searchName.toLowerCase());
+      const punchInDate = DateTime.fromISO(record.punchIn);
+      const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
+      const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+
+      return fullNameMatch && yearMatch && monthMatch;
+    });
+
+    setFilteredData(filtered);
+  }, [searchName, searchYear, searchMonth, punchData]);
 
 
   return (
