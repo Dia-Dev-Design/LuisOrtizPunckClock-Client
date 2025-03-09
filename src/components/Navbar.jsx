@@ -5,9 +5,9 @@ const Navbar = () => {
   const { logOutUser, getToken, getUsername } = useContext(AuthContext);
   const [user, setUser] = useState('')
 
-  console.log("this is the user ->", user);
-
+  
   useEffect(() => {
+      console.log("this is the user ->", user);
     if(!user) {
         let thisUser = getUsername()
         setUser(thisUser)
