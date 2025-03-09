@@ -27,11 +27,6 @@ const PunchClockTable = ({ isPunchInEnabled, isPunchOutEnabled }) => {
     let hoursWorked = DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), {string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"]})
     console.log("These are hours worked right here", hoursWorked)      
     return hoursWorked
-    
-    // DateTime.fromISO(timeIn).toRelative({
-    //   base: DateTime.fromISO(timeOut),
-    //   string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"],
-    // })
   };
 
   // Fetch data on initial load and whenever refreshTable changes
@@ -41,31 +36,31 @@ const PunchClockTable = ({ isPunchInEnabled, isPunchOutEnabled }) => {
 
 
 
-      const filtered = searchName && punchData.length ? punchData.filter(record => {
-        console.log("this is the record upon execution of effect", record, searchName)
-        const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
-        const punchInDate = DateTime.fromISO(record.punchIn);
-        const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
-        const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+      // const filtered = searchName && punchData.length ? punchData.filter(record => {
+      //   console.log("this is the record upon execution of effect", record, searchName)
+      //   const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
+      //   const punchInDate = DateTime.fromISO(record.punchIn);
+      //   const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
+      //   const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
   
-        return fullNameMatch && yearMatch && monthMatch;
-      }) : searchYear && punchData.length ? punchData.filter(record => {
-        console.log("this is the record upon execution of effect", record, searchName)
-        const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
-        const punchInDate = DateTime.fromISO(record.punchIn);
-        const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
-        const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+      //   return fullNameMatch && yearMatch && monthMatch;
+      // }) : searchYear && punchData.length ? punchData.filter(record => {
+      //   console.log("this is the record upon execution of effect", record, searchName)
+      //   const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
+      //   const punchInDate = DateTime.fromISO(record.punchIn);
+      //   const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
+      //   const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
   
-        return fullNameMatch && yearMatch && monthMatch;
-      }) : searchMonth && punchData.length ? punchData.filter(record => {
-        console.log("this is the record upon execution of effect", record, searchName)
-        const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
-        const punchInDate = DateTime.fromISO(record.punchIn);
-        const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
-        const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+      //   return fullNameMatch && yearMatch && monthMatch;
+      // }) : searchMonth && punchData.length ? punchData.filter(record => {
+      //   console.log("this is the record upon execution of effect", record, searchName)
+      //   const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
+      //   const punchInDate = DateTime.fromISO(record.punchIn);
+      //   const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
+      //   const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
   
-        return fullNameMatch && yearMatch && monthMatch;
-      }) : punchData
+      //   return fullNameMatch && yearMatch && monthMatch;
+      // }) : punchData
   
 
   // useEffect(() => {
@@ -129,7 +124,7 @@ const PunchClockTable = ({ isPunchInEnabled, isPunchOutEnabled }) => {
           </tr>
         </thead>
         <tbody>
-          {filtered.map((record) => (
+          {filteredData.map((record) => (
             <tr key={record._id}>
               <td>{record.user.username}</td>
               <td>{record.punchIn ? DateTime.fromISO(record.punchIn).toLocaleString(DateTime.DATETIME_SHORT) : 'N/A'}</td>
