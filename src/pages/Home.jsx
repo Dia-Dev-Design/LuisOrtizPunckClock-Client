@@ -1,46 +1,20 @@
-import { useState, useContext, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+
 import { AuthContext } from "../context/auth.context";
-import LoginForm from "../components/LoginForm";
-import SignupForm from "../components/SignupForm";
+// Import components lazily to prevent render cascades
+const LoginForm = React.lazy(() => import("../components/LoginForm"));
+const SignupForm = React.lazy(() => import("../components/SignupForm"));
 
 const Home = () => {
-  const [isChecked, setIsChecked] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+  // Use a single formType state instead of a boolean
+  const [formType, setFormType] = useState("login");
   const { user } = useContext(AuthContext);
-  const timeoutRef = useRef(null);
-  
-  // Clear any pending timeouts when component unmounts
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
 
-  const handleCheckboxChange = (event) => {
-    const newChecked = event.target.checked;
-    setIsChecked(newChecked);
-    
-    // Hide the current form first
-    setShowForm(false);
-    
-    // Then show the new form after a short delay
-    // This prevents rapid mounting/unmounting of components
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    
-    timeoutRef.current = setTimeout(() => {
-      setShowForm(true);
-    }, 50);
+  // Handle form type change without triggering re-renders of both components
+  const handleFormChange = (event) => {
+    // Use the actual value instead of a checked state
+    setFormType(event.target.value);
   };
-
-  // Initialize form visibility on first render
-  useEffect(() => {
-    setShowForm(true);
-  }, []);
 
   return (
     <div className="HomePage">
@@ -49,25 +23,56 @@ const Home = () => {
       {!user ? (
         <>
           <div>
-            <label htmlFor="toggle-details">Login</label>
-            <label className="toggle">
+            {/* Use radio buttons instead of a toggle for more explicit control */}
+            <label>
               <input
-                type="checkbox"
-                id="toggle-details"
-                checked={isChecked}
-                onChange={handleCheckboxChange}
+                type="radio"
+                name="formType"
+                value="login"
+                checked={formType === "login"}
+                onChange={handleFormChange}
               />
-              <span className="slider"></span>
+              Login
             </label>
-            <label htmlFor="toggle-details">Signup</label>
+            <label>
+              <input
+                type="radio"
+                name="formType"
+                value="signup"
+                checked={formType === "signup"}
+                onChange={handleFormChange}
+              />
+              Signup
+            </label>
           </div>
 
-          {showForm && (
-            isChecked ? <SignupForm key="signup" /> : <LoginForm key="login" />
-          )}
+          {/* Use a wrapper div that remains mounted */}
+          <div className="form-container">
+            {/* Only render ONE form at a time, never both */}
+            {formType === "login" && (
+              <React.Suspense fallback={<div>Loading...</div>}>
+                <LoginForm />
+              </React.Suspense>
+            )}
+            {formType === "signup" && (
+              <React.Suspense fallback={<div>Loading...</div>}>
+                <SignupForm />
+              </React.Suspense>
+            )}
+          </div>
         </>
       ) : (
-        <Link to="/punchclock">Punch Clock</Link>
+        // Prevent immediate navigation with a button instead of direct Link
+        <button
+          onClick={() => {
+            // Add a small delay before navigation
+            setTimeout(() => {
+              window.location.href = "/punchclock";
+            }, 100);
+          }}
+        >
+          Go to Punch Clock
+        </button>
       )}
     </div>
   );
