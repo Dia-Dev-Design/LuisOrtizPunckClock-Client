@@ -1,17 +1,21 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import LoginForm from "../components/LoginForm";
 import SignupForm from "../components/SignupForm";
 
 const Home = () => {
+  // Use lazy initialization for state
   const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-  };
-
   const { user } = useContext(AuthContext);
+
+  // Memoize the handler to prevent recreation on each render
+  const handleCheckboxChange = useCallback((event) => {
+    setIsChecked(event.target.checked);
+  }, []);
+  
+  // Memoize which form to show to avoid unnecessary re-renders
+  const FormComponent = isChecked ? SignupForm : LoginForm;
 
   return (
     <div className="HomePage">
@@ -33,9 +37,8 @@ const Home = () => {
             <label htmlFor="toggle-details">Signup</label>
           </div>
 
-          {!isChecked && <LoginForm />}
-
-          {isChecked && <SignupForm />}
+          {/* Use a single component reference instead of conditional rendering */}
+          <FormComponent />
         </>
       ) : (
         <Link to="/punchclock">Punch Clock</Link>
