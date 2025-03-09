@@ -56,6 +56,7 @@ function AuthProvider({ children }) {
                 .catch((error) => {
                     // If the server sends an error response (invalid token)
                     // Update state variables
+                    console.log(error)
                     removeToken();
                     setIsLoading(false);
                     setUser(null);
@@ -72,9 +73,14 @@ function AuthProvider({ children }) {
     const logOutUser = () => {
         // To log out the user, remove the token
         removeToken();
-
-        // And update the state variables
-        authenticateUser();
+        
+        // Clear user data immediately without API call
+        setIsLoading(false);
+        setUser(null);
+        localStorage.removeItem('user');
+        localStorage.removeItem('username');
+        
+        // Navigate to home page
         navigate('/');
     };
 
