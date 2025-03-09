@@ -13,18 +13,18 @@ function App() {
     return getToken() ? <Outlet /> : <Navigate to='/punchclock' />;
   };
 
-  const IsLoggedOut = () => {
-    return !getToken() ? <Outlet /> : <Navigate to='/' />;
-  }
+  // const IsLoggedOut = () => {
+  //   return !getToken() ? <Outlet /> : <Navigate to='/' />;
+  // }
 
   return (
     <div className='App'>
       <Navbar />
 
       <Routes>
-        <Route element={<IsLoggedOut />}>
+        {/* <Route element={<IsLoggedOut />}> */}
           <Route path='/' element={<Home />} />
-        </Route>
+        {/* </Route> */}
 
         <Route element={<IsLoggedIn/>}>
           <Route path='/punchclock' element={<PunchClock />} />
