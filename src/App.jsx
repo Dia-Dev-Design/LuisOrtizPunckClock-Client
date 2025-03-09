@@ -10,7 +10,7 @@ function App() {
   const { getToken } = useContext(AuthContext);
 
   const IsLoggedIn = () => {
-    return getToken() ? <Outlet /> : <Navigate to='/punchclock' />;
+    return getToken() ? <Outlet /> : <Navigate to='/' />;
   };
 
   // const IsLoggedOut = () => {
