@@ -44,6 +44,7 @@ const PunchClockTable = ({ refreshTable }) => {
     if (user && punchData.length) {
 
       const filtered = punchData.filter(record => {
+        console.log("this is the record upon execution of effect", record, searchName)
         const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
         const punchInDate = DateTime.fromISO(record.punchIn);
         const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
