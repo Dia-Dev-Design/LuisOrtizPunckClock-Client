@@ -4,7 +4,7 @@ import axios from 'axios';
 import { DateTime } from 'luxon';
 import { SERVER_URL } from '../services/SERVER_URL';
 
-const PunchClockTable = ({ refreshTable }) => {
+const PunchClockTable = ({ isPunchInEnabled, isPunchOutEnabled }) => {
   const [punchData, setPunchData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchName, setSearchName] = useState('');
@@ -37,7 +37,7 @@ const PunchClockTable = ({ refreshTable }) => {
   // Fetch data on initial load and whenever refreshTable changes
   useEffect(() => {
     fetchPunchData();
-  }, [refreshTable]);
+  }, [isPunchInEnabled, isPunchOutEnabled]);
 
 
 

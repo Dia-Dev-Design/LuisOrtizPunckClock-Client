@@ -9,7 +9,7 @@ const PunchClockPage = () => {
   const [punchInId, setPunchInId] = useState(null);
   const [isPunchInEnabled, setIsPunchInEnabled] = useState(true);
   const [isPunchOutEnabled, setIsPunchOutEnabled] = useState(false);
-  const [refreshTable, setRefreshTable] = useState(false);
+  // const [refreshTable, setRefreshTable] = useState(false);
 
   const handlePunchIn = (id) => {
     setPunchInId(id);
@@ -24,13 +24,13 @@ const PunchClockPage = () => {
   };
 
   // Auto-refresh table every 5 seconds
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setRefreshTable(prev => !prev); // Toggle refreshTable state to trigger re-render in PunchClockTable
-    }, 5000); // 5000 ms = 5 seconds
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setRefreshTable(prev => !prev); // Toggle refreshTable state to trigger re-render in PunchClockTable
+  //   }, 5000); // 5000 ms = 5 seconds
 
-    return () => clearInterval(intervalId); // Clear interval on component unmount
-  }, []);
+  //   return () => clearInterval(intervalId); // Clear interval on component unmount
+  // }, []);
 
   return (
     <div>
@@ -49,7 +49,7 @@ const PunchClockPage = () => {
       </div>
 
       <div>
-        <PunchClockTable refreshTable={refreshTable} />
+        <PunchClockTable isPunchInEnabled={isPunchInEnabled} isPunchOutEnabled={isPunchOutEnabled} />
       </div>
     </div>
   );
