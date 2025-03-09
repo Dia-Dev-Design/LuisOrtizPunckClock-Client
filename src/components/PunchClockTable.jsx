@@ -39,7 +39,35 @@ const PunchClockTable = ({ refreshTable }) => {
     fetchPunchData();
   }, [refreshTable]);
 
-  // Filtering logic remains the same
+
+
+      const filtered = searchName && punchData.length ? punchData.filter(record => {
+        console.log("this is the record upon execution of effect", record, searchName)
+        const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
+        const punchInDate = DateTime.fromISO(record.punchIn);
+        const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
+        const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+  
+        return fullNameMatch && yearMatch && monthMatch;
+      }) : searchYear && punchData.length ? punchData.filter(record => {
+        console.log("this is the record upon execution of effect", record, searchName)
+        const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
+        const punchInDate = DateTime.fromISO(record.punchIn);
+        const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
+        const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+  
+        return fullNameMatch && yearMatch && monthMatch;
+      }) : searchMonth && punchData.length ? punchData.filter(record => {
+        console.log("this is the record upon execution of effect", record, searchName)
+        const fullNameMatch = record?.user?.username?.toLowerCase().includes(searchName.toLowerCase());
+        const punchInDate = DateTime.fromISO(record.punchIn);
+        const yearMatch = searchYear ? punchInDate.year === parseInt(searchYear, 10) : true;
+        const monthMatch = searchMonth ? punchInDate.month === parseInt(searchMonth, 10) : true;
+  
+        return fullNameMatch && yearMatch && monthMatch;
+      }) : punchData
+  
+
   // useEffect(() => {
   //   if (user && punchData.length) {
 
@@ -56,6 +84,7 @@ const PunchClockTable = ({ refreshTable }) => {
   //     setFilteredData(filtered);
   //   }
   // }, [searchName, searchYear, searchMonth, punchData]);
+  // Filtering logic remains the same
 
   return (
     <div>
@@ -100,7 +129,7 @@ const PunchClockTable = ({ refreshTable }) => {
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((record) => (
+          {filtered.map((record) => (
             <tr key={record._id}>
               <td>{record.user.username}</td>
               <td>{record.punchIn ? DateTime.fromISO(record.punchIn).toLocaleString(DateTime.DATETIME_SHORT) : 'N/A'}</td>
