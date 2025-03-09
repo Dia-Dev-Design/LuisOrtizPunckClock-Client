@@ -24,9 +24,9 @@ const PunchClockTable = ({ isPunchInEnabled, isPunchOutEnabled }) => {
   };
 
   const returnTimeWorked = (timeIn, timeOut) => {
-    let hoursWorked = DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), {string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"]})
-    console.log("These are hours worked right here", hoursWorked)      
-    return hoursWorked
+    // let hoursWorked = DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), {string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"]})
+    // console.log("These are hours worked right here", hoursWorked)      
+    return 'hi'
   };
 
   // Fetch data on initial load and whenever refreshTable changes
