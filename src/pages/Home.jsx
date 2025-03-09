@@ -17,7 +17,7 @@ const Home = () => {
     <div className="HomePage">
       <h1>Dia Dev Clock In</h1>
 
-      {user ? (
+      {!user ? (
         <>
           <div>
             <label htmlFor="toggle-details">Login</label>
