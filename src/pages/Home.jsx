@@ -1,21 +1,46 @@
-import { useState, useContext, useCallback } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import LoginForm from "../components/LoginForm";
 import SignupForm from "../components/SignupForm";
 
 const Home = () => {
-  // Use lazy initialization for state
   const [isChecked, setIsChecked] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const { user } = useContext(AuthContext);
-
-  // Memoize the handler to prevent recreation on each render
-  const handleCheckboxChange = useCallback((event) => {
-    setIsChecked(event.target.checked);
-  }, []);
+  const timeoutRef = useRef(null);
   
-  // Memoize which form to show to avoid unnecessary re-renders
-  const FormComponent = isChecked ? SignupForm : LoginForm;
+  // Clear any pending timeouts when component unmounts
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleCheckboxChange = (event) => {
+    const newChecked = event.target.checked;
+    setIsChecked(newChecked);
+    
+    // Hide the current form first
+    setShowForm(false);
+    
+    // Then show the new form after a short delay
+    // This prevents rapid mounting/unmounting of components
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    
+    timeoutRef.current = setTimeout(() => {
+      setShowForm(true);
+    }, 50);
+  };
+
+  // Initialize form visibility on first render
+  useEffect(() => {
+    setShowForm(true);
+  }, []);
 
   return (
     <div className="HomePage">
@@ -37,8 +62,9 @@ const Home = () => {
             <label htmlFor="toggle-details">Signup</label>
           </div>
 
-          {/* Use a single component reference instead of conditional rendering */}
-          <FormComponent />
+          {showForm && (
+            isChecked ? <SignupForm key="signup" /> : <LoginForm key="login" />
+          )}
         </>
       ) : (
         <Link to="/punchclock">Punch Clock</Link>
