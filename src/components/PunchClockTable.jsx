@@ -27,7 +27,7 @@ const PunchClockTable = ({ isPunchInEnabled, isPunchOutEnabled }) => {
   const returnTimeWorked = (timeIn, timeOut) => {
     let hoursWorked = DateTime.fromISO(timeOut).diff(DateTime.fromISO(timeIn), ["days", "hours", "minutes", "seconds"])
     console.log("These are hours worked right here", hoursWorked)      
-    return hoursWorked.valuses.days ? `${hoursWorked.valuses.days} days` : "" + hoursWorked.valuses.hours ? `${hoursWorked.valuses.hours}` : "" + hoursWorked.valuses.minutes ? `${hoursWorked.valuses.minutes}` : "" + hoursWorked.valuses.seconds ? `${hoursWorked.valuses.seconds}` : "" 
+    return hoursWorked.values.days ? `${hoursWorked.values.days} days` : "" + hoursWorked.values.hours ? `${hoursWorked.values.hours}` : "" + hoursWorked.values.minutes ? `${hoursWorked.values.minutes}` : "" + hoursWorked.values.seconds ? `${hoursWorked.values.seconds}` : "" 
   };
 
   // const returnTimeWorked = (timeIn, timeOut) => {
