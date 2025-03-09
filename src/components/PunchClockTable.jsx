@@ -25,6 +25,8 @@ const PunchClockTable = ({ refreshTable }) => {
       base: DateTime.fromISO(timeOut),
       string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"],
     })
+    let timeWorked = timeRelative ? timeRelative : ''
+    console.log("This is typeof timeWorked", timeWorked)
     return timeRelative.toString().split(' ').pop().join(' ')
   };
 

@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 const Navbar = () => {
@@ -26,6 +27,7 @@ const Navbar = () => {
             getToken() &&
             <>
                 <h3>Welcome, {user || 'User'}!</h3>
+                <Link to='/punchclock'>Punch Clock</Link>
                 <button onClick={logOutUser}>Logout</button>
             </>
         }
