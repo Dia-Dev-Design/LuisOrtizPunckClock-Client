@@ -21,10 +21,11 @@ const PunchClockTable = ({ refreshTable }) => {
   };
 
   const returnTimeWorked = (timeIn, timeOut) => {
-    return DateTime.fromISO(timeIn).toRelative({
+    let timeRelative = DateTime.fromISO(timeIn).toRelative({
       base: DateTime.fromISO(timeOut),
       string: ["years", "months", "weeks", "days", "hours", "minutes", "seconds"],
-    }).split(' ').pop().join(' ')
+    })
+    return timeRelative.split(' ').pop().join(' ')
   };
 
   // Fetch data on initial load and whenever refreshTable changes
