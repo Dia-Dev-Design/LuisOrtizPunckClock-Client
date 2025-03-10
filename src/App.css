@@ -75,7 +75,13 @@ body {
 
 .buttonRow {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.radios {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card {

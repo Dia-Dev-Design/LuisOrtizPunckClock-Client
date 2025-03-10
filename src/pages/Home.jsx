@@ -24,7 +24,7 @@ const Home = () => {
         <>
           <div>
             {/* Use radio buttons instead of a toggle for more explicit control */}
-            <label>
+            <label className="radios">
               <input
                 type="radio"
                 name="formType"
@@ -34,7 +34,7 @@ const Home = () => {
               />
               Login
             </label>
-            <label>
+            <label className="radios">
               <input
                 type="radio"
                 name="formType"
