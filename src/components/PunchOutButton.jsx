@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import { SERVER_URL } from '../services/SERVER_URL';
@@ -26,6 +26,10 @@ const PunchOutButton = ({ punchInId, onPunchOut, isDisabled }) => {
       })
       .catch((error) => console.log(error));
   };
+
+  useEffect(() => {
+    console.log("This is the disabled status of punch out button +++++>", isDisabled)
+  }, [isDisabled])
 
   return (
     <button className='punchOut' onClick={handlePunchOut} disabled={isDisabled}>
