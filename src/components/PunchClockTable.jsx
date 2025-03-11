@@ -19,12 +19,19 @@ const PunchClockTable = ({ refreshTable, setIsPunchOutEnabled }) => {
       .then((response) => {
         setPunchData(response.data);
         setFilteredData(response.data);
-        response.data.forEach((record) => {
-          console.log("This is record, userId, and recorduser", record, user._id, record.user.toString())
-          if (user._id === record.user._id.toString() && record.punchOut === '') {
-              setIsPunchOutEnabled(true)
-          }
+        let userRecords = response.data.filter((record) => {
+          return user._id.toString() == record.user._id.toString()
         })
+
+        console.log("These are user records...", userRecords)
+
+        let finalRecord = [...userRecords][userRecords.length - 1]
+
+        console.log("This is the final record ======>", finalRecord)
+
+        if (finalRecord.punchOut === '') {
+            setIsPunchOutEnabled(true)
+        }
       })
       .catch((error) => console.log(error));
   };
