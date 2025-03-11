@@ -30,7 +30,7 @@ const PunchClockTable = ({ refreshTable, setIsPunchOutEnabled }) => {
         console.log("This is the final record ======>", finalRecord)
 
         if (finalRecord.punchOut === '') {
-            setIsPunchOutEnabled(true)
+            setIsPunchOutEnabled(false)
         }
       })
       .catch((error) => console.log(error));
