@@ -49,7 +49,7 @@ const PunchClockPage = () => {
       </div>
 
       <div>
-        <PunchClockTable refreshTable={refreshTable} setIsPunchOutEnabled={setIsPunchOutEnabled} />
+        <PunchClockTable refreshTable={refreshTable} setIsPunchOutEnabled={setIsPunchOutEnabled} setPunchInId={setPunchInId} />
       </div>
     </div>
   );

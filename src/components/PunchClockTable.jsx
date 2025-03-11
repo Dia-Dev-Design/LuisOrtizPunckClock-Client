@@ -4,7 +4,7 @@ import axios from 'axios';
 import { DateTime } from 'luxon';
 import { SERVER_URL } from '../services/SERVER_URL';
 
-const PunchClockTable = ({ refreshTable, setIsPunchOutEnabled }) => {
+const PunchClockTable = ({ refreshTable, setIsPunchOutEnabled, setPunchInId }) => {
   const [punchData, setPunchData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchName, setSearchName] = useState('');
@@ -28,6 +28,8 @@ const PunchClockTable = ({ refreshTable, setIsPunchOutEnabled }) => {
         let finalRecord = [...userRecords][userRecords.length - 1]
 
         console.log("This is the final record ======>", finalRecord)
+
+        setPunchInId(finalRecord._id)
 
         if (finalRecord.punchOut === '') {
             setIsPunchOutEnabled(false)
