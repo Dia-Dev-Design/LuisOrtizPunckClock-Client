@@ -15,6 +15,8 @@ const PunchOutButton = ({ punchInId, onPunchOut, isDisabled }) => {
       punchOut: currentTime
     };
 
+    console.log("This is the button being clicked", punchInId)
+
     axios
       .put(`${SERVER_URL}/punchclock/${punchInId}`, requestBody)
       .then((response) => {
