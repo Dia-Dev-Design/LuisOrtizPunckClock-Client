@@ -45,11 +45,11 @@ const PunchClockPage = () => {
       <div className='buttonRow'>
         <PunchInButton onPunchIn={handlePunchIn} isDisabled={!isPunchInEnabled} />
         
-        <PunchOutButton punchInId={punchInId} onPunchOut={handlePunchOut} isDisabled={!isPunchOutEnabled} />
+        <PunchOutButton punchInId={punchInId} onPunchOut={handlePunchOut} setIsPunchOutEnabled={setIsPunchOutEnabled} isDisabled={isPunchOutEnabled} />
       </div>
 
       <div>
-        <PunchClockTable refreshTable={refreshTable} />
+        <PunchClockTable refreshTable={refreshTable} setIsPunchOutEnabled={setIsPunchOutEnabled} />
       </div>
     </div>
   );

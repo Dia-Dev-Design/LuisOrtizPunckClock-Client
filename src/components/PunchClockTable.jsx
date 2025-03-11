@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
-// import { AuthContext } from '../context/auth.context';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import { SERVER_URL } from '../services/SERVER_URL';
 
-const PunchClockTable = ({ refreshTable }) => {
+const PunchClockTable = ({ refreshTable, setIsPunchOutEnabled }) => {
   const [punchData, setPunchData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchName, setSearchName] = useState('');
   const [searchYear, setSearchYear] = useState('');
   const [searchMonth, setSearchMonth] = useState('');
 
-  // const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
   const fetchPunchData = () => {
     axios
@@ -19,6 +19,12 @@ const PunchClockTable = ({ refreshTable }) => {
       .then((response) => {
         setPunchData(response.data);
         setFilteredData(response.data);
+        response.data.forEach((record) => {
+          console.log("This is record, userId, and recorduser", record, user._id, record.user.toString())
+          if (user._id === record.user.toString() && record.punchOut === '') {
+              setIsPunchOutEnabled(true)
+          }
+        })
       })
       .catch((error) => console.log(error));
   };
