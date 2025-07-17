@@ -18,7 +18,10 @@ function App() {
   // }
 
   return (
-    <div className='App'>
+    <div 
+      className='App min-h-screen bg-marshmallow'
+      style={{ backgroundColor: '#F2F2F2' }}
+    >
       <Navbar />
 
       <Routes>

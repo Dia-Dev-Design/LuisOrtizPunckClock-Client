@@ -19,7 +19,7 @@ const PunchClockTable = ({ refreshTable, setIsPunchOutEnabled, setPunchInId }) =
       .then((response) => {
         setPunchData(response.data);
         setFilteredData(response.data);
-        let userRecords = response.data.filter((record) => {
+        let userRecords = response.data.filte.sortr((record) => {
           return user._id.toString() == record.user._id.toString()
         })
 

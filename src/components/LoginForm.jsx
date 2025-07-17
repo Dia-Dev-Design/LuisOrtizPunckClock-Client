@@ -10,7 +10,6 @@ const LoginForm = () => {
   });
 
   const navigate = useNavigate();
-
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
   const handleTextInput = (e) => {
@@ -32,25 +31,50 @@ const LoginForm = () => {
   };
 
   return (
-    <div className='card loginPage'>
-      <h1>Login</h1>
+    <div>
+      <h1 className="text-3xl font-bold text-aquaGreen mb-8 text-center">Welcome Back!</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input name='email' type='email' value={user.email} onChange={handleTextInput} />
-        </label>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Email
+          </label>
+          <input 
+            name='email' 
+            type='email' 
+            value={user.email} 
+            onChange={handleTextInput}
+            className="w-full px-3 py-3 border-b-2 border-gray-300 focus:border-mint focus:outline-none transition-colors text-gray-900"
+            placeholder="Enter your email"
+          />
+        </div>
 
-        <br />
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Password
+          </label>
+          <input 
+            name='password' 
+            type='password' 
+            value={user.password} 
+            onChange={handleTextInput}
+            className="w-full px-3 py-3 border-b-2 border-gray-300 focus:border-mint focus:outline-none transition-colors text-gray-900"
+            placeholder="Enter your password"
+          />
+        </div>
 
-        <label>
-          Password
-          <input name='password' type='password' value={user.password} onChange={handleTextInput} />
-        </label>
+        <div className="text-right">
+          <a href="#" className="text-sm text-skyBlue hover:text-mint transition-colors">
+            Forgot password?
+          </a>
+        </div>
 
-        <br />
-
-        <button type='submit'>Login</button>
+        <button 
+          type='submit'
+          className="w-full py-3 bg-mint text-aquaGreen font-bold text-lg rounded-lg hover:bg-skyBlue hover:text-white transition-colors shadow-md"
+        >
+          Login
+        </button>
       </form>
     </div>
   );
