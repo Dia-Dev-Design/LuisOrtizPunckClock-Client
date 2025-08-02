@@ -6,7 +6,7 @@ import bgImage from "../assets/bg-img.png";
 const LoginForm = React.lazy(() => import("../components/LoginForm"));
 const SignupForm = React.lazy(() => import("../components/SignupForm"));
 
-const Home = () => {
+const StandardHome = () => {
   const [isLogin, setIsLogin] = useState(true);
   const { user } = useContext(AuthContext);
 
@@ -47,7 +47,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Right Panel - Login/Signup Form */}
+      {/* Right Panel - Login/Signup Form - LIGHT MODE OPTIMIZED */}
       <div className="flex-1 flex flex-col justify-center items-center p-8 bg-marshmallow bg-absolute-light">
         <div className="w-full max-w-md">
           {/* Toggle Button */}
@@ -60,7 +60,7 @@ const Home = () => {
             </button>
           </div>
 
-          {/* Form Container */}
+          {/* Form Container - Optimized for light mode */}
           <div className="bg-white bg-absolute-white rounded-2xl shadow-xl p-8 border border-gray-100 border-absolute-gray hover:shadow-2xl transition-shadow duration-300">
             {!user ? (
               <>
@@ -106,4 +106,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default StandardHome; 

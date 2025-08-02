@@ -4,9 +4,61 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Enhanced Light Mode Meta Tags - Your Proven Strategy -->
+    <meta name="color-scheme" content="only light">
+    <meta name="supported-color-schemes" content="light">
+    <meta name="theme-color" content="#F2F2F2">
+    <meta name="msapplication-navbutton-color" content="#F2F2F2">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Additional Edge-specific meta tags -->
+    <meta name="msapplication-TileColor" content="#F2F2F2">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
     <title>PunchClock</title>
-    <script type="module" crossorigin src="/assets/index-BGjUwMlI.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Dlz5_Hfu.css">
+    
+    <!-- Pre-main aggressive light mode enforcement -->
+    <style>
+      /* Immediate light mode enforcement before anything else loads */
+      :root {
+        color-scheme: only light !important;
+        --force-bg: #F2F2F2 !important;
+        --force-text: #000000 !important;
+      }
+      
+      html, body {
+        color-scheme: only light !important;
+        background-color: #F2F2F2 !important;
+        color: #000000 !important;
+        forced-color-adjust: none !important;
+      }
+      
+      #root {
+        color-scheme: only light !important;
+        background-color: #F2F2F2 !important;
+        color: #000000 !important;
+      }
+      
+      /* Block any attempt at dark mode styling */
+      * {
+        color-scheme: only light !important;
+      }
+      
+      /* Continuous enforcement animation */
+      @keyframes enforceLight {
+        0%, 100% {
+          color-scheme: only light !important;
+          background-color: #F2F2F2 !important;
+        }
+      }
+      
+      body {
+        animation: enforceLight 0.1s infinite;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BDK_fHEn.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Clq9DYxW.css">
   </head>
   <body>
     <div id="root"></div>

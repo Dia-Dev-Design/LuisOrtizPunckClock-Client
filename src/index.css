@@ -1,5 +1,112 @@
+/* Import Aileron font */
 @import url('https://fonts.googleapis.com/css2?family=Aileron:wght@400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Enhanced light mode enforcement for Edge - Using "only light" strategy */
+@layer base {
+  :root {
+    --force-bg-white: #ffffff;
+    --force-bg-light: #F2F2F2;
+    --force-text-dark: #000000;
+    --force-text-gray: #6B7280;
+    color-scheme: only light !important;
+  }
+  
+  html {
+    color-scheme: only light !important;
+    background-color: var(--force-bg-white) !important;
+    forced-color-adjust: none !important;
+  }
+  
+  body {
+    color-scheme: only light !important;
+    background-color: var(--force-bg-light) !important;
+    color: var(--force-text-dark) !important;
+    forced-color-adjust: none !important;
+  }
+  
+  /* Aggressive overrides for common elements */
+  #root {
+    color-scheme: only light !important;
+    background-color: var(--force-bg-light) !important;
+    color: var(--force-text-dark) !important;
+  }
+  
+  .App {
+    color-scheme: only light !important;
+    background-color: var(--force-bg-light) !important;
+    color: var(--force-text-dark) !important;
+  }
+  
+  /* Form styling with forced colors */
+  input, textarea, select {
+    color-scheme: only light !important;
+    background-color: var(--force-bg-white) !important;
+    color: var(--force-text-dark) !important;
+    border-color: #d1d5db !important;
+  }
+  
+  /* Button overrides */
+  button {
+    forced-color-adjust: none !important;
+  }
+  
+  /* Universal light mode enforcement */
+  * {
+    color-scheme: only light !important;
+  }
+  
+  /* Preserve background images */
+  [style*="background-image"] {
+    /* Keep original styling */
+  }
+}
+
+/* Absolute color utilities for Edge compatibility */
+@layer utilities {
+  /* Absolute backgrounds - bypass semantic classes */
+  .bg-absolute-white { background-color: #ffffff !important; }
+  .bg-absolute-light { background-color: #F2F2F2 !important; }
+  .bg-absolute-mint { background-color: #48D994 !important; }
+  .bg-absolute-aqua { background-color: #2A6E6A !important; }
+  .bg-absolute-sky { background-color: #77B9F3 !important; }
+  .bg-absolute-dark-green { background-color: #01402F !important; }
+  .bg-absolute-gray { background-color: #d1d5db !important; }
+  
+  /* Absolute text colors */
+  .text-absolute-black { color: #000000 !important; }
+  .text-absolute-white { color: #ffffff !important; }
+  .text-absolute-gray { color: #6B7280 !important; }
+  .text-absolute-mint { color: #48D994 !important; }
+  .text-absolute-aqua { color: #2A6E6A !important; }
+  .text-absolute-sky { color: #77B9F3 !important; }
+  .text-absolute-dark-green { color: #01402F !important; }
+  
+  /* Absolute borders */
+  .border-absolute-gray { border-color: #d1d5db !important; }
+  .border-absolute-mint { border-color: #48D994 !important; }
+  
+  /* Enhanced force light mode class with "only light" */
+  .force-light-mode {
+    color-scheme: only light !important;
+    background-color: var(--force-bg-light) !important;
+    color: var(--force-text-dark) !important;
+    forced-color-adjust: none !important;
+  }
+  
+  /* Reverse psychology - make light and dark identical for stubborn elements */
+  .reverse-psychology-light {
+    color-scheme: only light !important;
+    background-color: #F2F2F2 !important;
+    color: #000000 !important;
+  }
+  
+  .reverse-psychology-dark {
+    color-scheme: only light !important;
+    background-color: #F2F2F2 !important;
+    color: #000000 !important;
+  }
+}

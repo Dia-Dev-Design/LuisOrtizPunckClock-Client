@@ -12,7 +12,16 @@ function Time() {
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
 
-  return <div>{time}</div>;
+  return (
+    <div className="text-center force-light-mode">
+      <div className="text-3xl font-bold text-aquaGreen text-absolute-aqua mb-2 font-mono">
+        {time}
+      </div>
+      <div className="text-sm text-gray-500 text-absolute-gray">
+        Live updates every second
+      </div>
+    </div>
+  );
 }
 
 export default Time;

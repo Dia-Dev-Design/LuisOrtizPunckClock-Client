@@ -31,12 +31,12 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-aquaGreen mb-8 text-center">Welcome Back!</h1>
+    <div className="force-light-mode">
+      <h1 className="text-3xl font-bold text-aquaGreen text-absolute-aqua mb-8 text-center">Welcome Back!</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 text-absolute-gray mb-2">
             Email
           </label>
           <input 
@@ -44,13 +44,14 @@ const LoginForm = () => {
             type='email' 
             value={user.email} 
             onChange={handleTextInput}
-            className="w-full px-3 py-3 border-b-2 border-gray-300 focus:border-mint focus:outline-none transition-colors text-gray-900"
+            className="w-full px-4 py-3 border-2 border-gray-200 border-absolute-gray rounded-lg focus:border-mint focus:border-absolute-mint focus:outline-none focus:ring-2 focus:ring-mint/20 transition-all duration-200 text-gray-900 text-absolute-black bg-white bg-absolute-white hover:border-mint/50 hover:shadow-sm"
             placeholder="Enter your email"
+            required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 text-absolute-gray mb-2">
             Password
           </label>
           <input 
@@ -58,20 +59,25 @@ const LoginForm = () => {
             type='password' 
             value={user.password} 
             onChange={handleTextInput}
-            className="w-full px-3 py-3 border-b-2 border-gray-300 focus:border-mint focus:outline-none transition-colors text-gray-900"
+            className="w-full px-4 py-3 border-2 border-gray-200 border-absolute-gray rounded-lg focus:border-mint focus:border-absolute-mint focus:outline-none focus:ring-2 focus:ring-mint/20 transition-all duration-200 text-gray-900 text-absolute-black bg-white bg-absolute-white hover:border-mint/50 hover:shadow-sm"
             placeholder="Enter your password"
+            required
+            minLength={6}
           />
         </div>
 
         <div className="text-right">
-          <a href="#" className="text-sm text-skyBlue hover:text-mint transition-colors">
+          <a 
+            href="#" 
+            className="text-sm text-skyBlue text-absolute-sky hover:text-mint hover:text-absolute-mint transition-colors duration-200 underline-offset-4 hover:underline"
+          >
             Forgot password?
           </a>
         </div>
 
         <button 
           type='submit'
-          className="w-full py-3 bg-mint text-aquaGreen font-bold text-lg rounded-lg hover:bg-skyBlue hover:text-white transition-colors shadow-md"
+          className="w-full py-3 bg-mint bg-absolute-mint text-aquaGreen text-absolute-dark-green font-bold text-lg rounded-lg hover:bg-skyBlue hover:bg-absolute-sky hover:text-white hover:text-absolute-white transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transform"
         >
           Login
         </button>

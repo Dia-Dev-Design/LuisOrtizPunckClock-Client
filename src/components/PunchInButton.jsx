@@ -30,8 +30,28 @@ const PunchInButton = ({ onPunchIn, isDisabled }) => {
   };
 
   return (
-    <button className='punchIn' onClick={handlePunchIn} disabled={isDisabled}>
-      Clock In
+    <button 
+      className={`
+        px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 transform
+        ${isDisabled 
+          ? 'bg-gray-300 bg-absolute-gray text-gray-500 text-absolute-gray cursor-not-allowed opacity-50' 
+          : 'bg-mint bg-absolute-mint text-aquaGreen text-absolute-dark-green hover:bg-skyBlue hover:bg-absolute-sky hover:text-white hover:text-absolute-white hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl'
+        }
+        min-w-[160px] force-light-mode
+      `}
+      onClick={handlePunchIn} 
+      disabled={isDisabled}
+    >
+      <div className="flex items-center justify-center gap-2">
+        <svg 
+          className="w-5 h-5" 
+          fill="currentColor" 
+          viewBox="0 0 20 20"
+        >
+          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+        </svg>
+        Clock In
+      </div>
     </button>
   );
 };
